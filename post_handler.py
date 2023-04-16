@@ -1,11 +1,13 @@
 import os
 import random
+import re
 import textwrap
 import time
 from string import ascii_letters
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
+import helper_images
 import json_handler
 
 
@@ -29,7 +31,9 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
     # verses: str = json_data[0]
     # refs: str = json_data[1]
 
-    quotes = ["test1", "test2"]
+    # Read the text file into a list of lines
+    with open(text_file, 'r', encoding='utf-8') as file:
+        quotes = file.readlines()
 
 
     # Get list of photos in the specified folder and shuffle it
@@ -53,7 +57,13 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
         random_image_num = image_num[0]
         del image_num[0]
         image_file = image_files[random_image_num]
-        file_name = f"/{i}-{random_image_num}.jpg"
+
+        image_license = image_file.split('/')
+        image_license = image_license[len(image_license)-1]
+        image_license = image_license.split('-')
+        image_license = image_license[len(image_license)-1].rstrip(".jpg")
+
+        file_name = f"/{i}-{image_license}.jpg"
         create_post(image_file=image_file, text=text,
                          font_dir=font_dir, output_path=output_path, file_name=file_name,
                          logo_file=logo_file, customer_name=customer_name)
@@ -86,14 +96,14 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
     # Define our text:
     # Calculate the average length of a single character of our font.
     # Note: this takes into account the specific font and font size.
-    avg_char_width = sum(font.getsize(char)[0] for char in ascii_letters) / len(ascii_letters)
+    # avg_char_width = sum(font.getsize(char)[0] for char in ascii_letters) / len(ascii_letters)
 
     # Translate this average length into a character count
-    max_char_count = int(img.size[0] * .718 / avg_char_width)
-
+    # max_char_count = int(img.size[0] / avg_char_width)
+    max_char_count = 25
     # Create a wrapped text object using scaled character count
     new_text = textwrap.fill(text=text, width=max_char_count)
-
+    # new_text = helper_images.split_string(text, max_char_count)
     # Define the positions of logo and text
     x_logo = 0
     y_logo = 1100
@@ -104,7 +114,7 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
     # Draw the shadow text
     shadow_color = (0, 0, 0, 128)
     shadow_position = (x_text+5, y_text+5)
-    draw.text(shadow_position, text, font=font, fill=shadow_color, anchor='mm')
+    draw.text(shadow_position, new_text, font=font, fill=shadow_color, anchor='mm', align='center')
 
     # Add main text to the image
     draw.text(position, text=new_text, font=font, fill=(255, 255, 255, 255), anchor='mm',
@@ -115,7 +125,7 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
         img_logo = Image.open(logo_file)
 
         # Reduce the alpha of the overlay image by 50%
-        alpha = 0.5
+        alpha = 0.7
         enhancer = ImageEnhance.Brightness(img_logo)
         img_logo_darken = enhancer.enhance(alpha)
 
@@ -130,6 +140,8 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
 
         # Convert from RGBA to RGB
         img_with_logo_rgb = img_with_logo.convert("RGB")
+
+        file_name
 
         # Save the image
         img_with_logo_rgb.save(f"{output_path}/{file_name}")

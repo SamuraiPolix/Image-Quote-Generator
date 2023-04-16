@@ -2,6 +2,43 @@ from PIL import Image, ImageEnhance
 import os
 
 
+def split_string(string, max_chars_per_line):
+    words = string.split()
+    lines = []
+    current_line = ""
+    for word in words:
+        if len(current_line + " " + word) > max_chars_per_line:
+            lines.append(current_line.strip())
+            current_line = ""
+        current_line += " " + word
+    if current_line:
+        lines.append(current_line.strip())
+
+    # Re-combine lines to achieve even distribution of words
+    num_lines = len(lines)
+    if num_lines > 1:
+        total_words = len(words)
+        ideal_words_per_line = (total_words + num_lines - 1) // num_lines
+        excess_words = total_words - ideal_words_per_line * (num_lines - 1)
+
+        even_lines = []
+        i = 0
+        while i < num_lines - 1:
+            line_words = words[:ideal_words_per_line]
+            if excess_words > 0:
+                line_words.append(words[ideal_words_per_line])
+                excess_words -= 1
+                words.pop(ideal_words_per_line)
+            even_lines.append(" ".join(line_words))
+            words = words[ideal_words_per_line:]
+            i += 1
+        even_lines.append(" ".join(words))
+        return "\n".join(even_lines)
+    else:
+        return lines[0]
+
+
+
 def darken_images(images_folder, output_folder):
     # Set desired darkness
     dark = 0.5
