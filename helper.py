@@ -85,3 +85,12 @@ def cut_images(images_folder, output_folder):
 
             # Save the cropped image
             img.save(f"{output_folder}/{filename}")
+
+
+def create_new_topic_dirs(topic, project_dir):
+    # /customers/___
+    if not os.path.exists(f"{project_dir}/customers/{topic}"):
+        os.makedirs(f"{project_dir}/customers/{topic}")
+    # /sources/images/___
+    if not os.path.exists(f"{project_dir}/sources/images/{topic}"):
+        os.makedirs(f"{project_dir}/sources/images/{topic}")
