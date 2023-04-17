@@ -5,7 +5,7 @@ import helper
 
 project_dir = os.getcwd().replace("\\", "/")
 # Available topics: christian, fitness
-TOPIC = "christian"
+TOPIC = "fitness"
 
 # Define the paths and values to everything
 number_of_posts = 119
@@ -21,13 +21,14 @@ customer_name = "no_logo"
 
 if __name__ == "__main__":
     # helper.create_new_topic_dirs(TOPIC, project_dir)
-    # helper.cut_images(images_folder, images_folder_cropped)
+
+    helper.cut_images_new(images_folder, images_folder_cropped)
     # helper.darken_images(images_folder_cropped, images_folder_cropped_darken)
 
     # LOGO
-    post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
-                         font_dir=font_dir, output_folder=output_folder,
-                         logo_file=logo_file, customer_name=customer_name, number_of_posts=number_of_posts)
+    # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
+    #                      font_dir=font_dir, output_folder=output_folder,
+    #                      logo_file=logo_file, customer_name=customer_name, number_of_posts=number_of_posts)
 
     # NO LOGO
     # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,

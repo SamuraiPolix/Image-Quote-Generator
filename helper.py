@@ -60,16 +60,16 @@ def darken_images(images_folder, output_folder):
             dark_img.save(f"{output_folder}/{filename}")
 
 
-def cut_images(images_folder, output_folder):
+def cut_images_old(images_folder, output_folder):
     # Set the target size
     target_size = (1080, 1350)
-
     # Loop through all the images in the directory
     for filename in os.listdir(images_folder):
         if filename.endswith(".jpg") or filename.endswith(".png"):
             # Open the image
             filepath = os.path.join(images_folder, filename)
             img = Image.open(filepath)
+            resize_ration = min(target_size[0] / img.width, target_size[1] / img.height)
 
             # Get the size of the image
             width, height = img.size
@@ -87,6 +87,45 @@ def cut_images(images_folder, output_folder):
             img.save(f"{output_folder}/{filename}")
 
 
+def cut_images(images_folder, output_folder):
+    # Set desired ratio
+    desired_ratio = 1080 / 1350
+
+    # Loop through all files in input folder
+    for filename in os.listdir(images_folder):
+        if filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.png'):
+            # Open the image
+            img = Image.open(os.path.join(images_folder, filename))
+
+            # Get image dimensions
+            width, height = img.size
+            ratio = width / height
+
+            # Calculate new dimensions
+            if ratio > desired_ratio:
+                # Image is wider than desired ratio, crop width
+                new_width = round(height * desired_ratio)
+                new_height = height
+            else:
+                # Image is taller than desired ratio, crop height
+                new_width = width
+                new_height = round(width / desired_ratio)
+
+            # Crop the image in the center
+            left = (width - new_width) / 2
+            top = (height - new_height) / 2
+            right = left + new_width
+            bottom = top + new_height
+            img = img.crop((left, top, right, bottom))
+
+            # Resize the image if necessary
+            if img.size != (1080, 1350):
+                img = img.resize((1080, 1350))
+
+            # Save the image to output folder
+            img.save(os.path.join(output_folder, filename))
+
+
 def create_new_topic_dirs(topic, project_dir):
     # /customers/___
     if not os.path.exists(f"{project_dir}/customers/{topic}"):
@@ -94,3 +133,5 @@ def create_new_topic_dirs(topic, project_dir):
     # /sources/images/___
     if not os.path.exists(f"{project_dir}/sources/images/{topic}"):
         os.makedirs(f"{project_dir}/sources/images/{topic}")
+        os.makedirs(f"{project_dir}/sources/images/{topic}/cropped")
+        os.makedirs(f"{project_dir}/sources/images/{topic}/cropped/darken")
