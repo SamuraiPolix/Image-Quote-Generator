@@ -1,30 +1,36 @@
+import os
 import post_handler
-import helper_images
+import helper
 
+
+project_dir = os.getcwd().replace("\\", "/")
 # Available topics: christian, fitness
 TOPIC = "christian"
 
 # Define the paths and values to everything
 number_of_posts = 119
-images_folder = f"C:/Bots/ChristianPostMaker/sources/images/{TOPIC}"
+images_folder = f"{project_dir}/sources/images/{TOPIC}"
 images_folder_cropped = f"{images_folder}/cropped"
 images_folder_cropped_darken = f"{images_folder_cropped}/darken"
-text_file = f"C:/Bots/ChristianPostMaker/sources/text_data/{TOPIC}.txt"
+text_file = f"{project_dir}/sources/text_data/{TOPIC}.txt"
 font_dir = "C:/Users/samla/AppData/Local/Microsoft/Windows/Fonts/MouldyCheeseRegular-WyMWG.ttf"
-output_folder = f"C:/Bots/ChristianPostMaker/customers/{TOPIC}"
-logo_file = "C:/Bots/ChristianPostMaker/sources/logo.png"
+output_folder = f"{project_dir}/customers/{TOPIC}"
+logo_file = f"{project_dir}/sources/logo.png"
 customer_name = "no_logo"
 
 
 if __name__ == "__main__":
-    # helper_images.cut_images(images_folder, images_folder_cropped)
-    # helper_images.darken_images(images_folder_cropped, images_folder_cropped_darken)
-    # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
-    #                      font_dir=font_dir, output_folder=output_folder,
-    #                      logo_file=logo_file, customer_name=customer_name, number_of_posts=number_of_posts)
+    # helper.create_new_topic_dirs(TOPIC, project_dir)
+    # helper.cut_images(images_folder, images_folder_cropped)
+    # helper.darken_images(images_folder_cropped, images_folder_cropped_darken)
 
-    # No logo
+    # LOGO
     post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
                          font_dir=font_dir, output_folder=output_folder,
-                         customer_name=customer_name, number_of_posts=number_of_posts)
+                         logo_file=logo_file, customer_name=customer_name, number_of_posts=number_of_posts)
+
+    # NO LOGO
+    # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
+    #                      font_dir=font_dir, output_folder=output_folder,
+    #                      customer_name=customer_name, number_of_posts=number_of_posts)
 
