@@ -7,7 +7,7 @@ from string import ascii_letters
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
-import helper_images
+import helper
 import json_handler
 
 
@@ -17,8 +17,8 @@ def create_dirs(output_folder, customer_name):
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     # Create folder inside for images
-    if not os.path.exists(f"{output_path}/verse_images"):
-        os.makedirs(f"{output_path}/verse_images")
+    # if not os.path.exists(f"{output_path}/verse_images"):
+    #     os.makedirs(f"{output_path}/verse_images")
     return output_path
 
 
