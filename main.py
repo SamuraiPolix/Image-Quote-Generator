@@ -8,6 +8,7 @@ project_dir = os.getcwd().replace("\\", "/")
 TOPIC = "christian"
 
 # Define the paths and values to everything
+# If number of posts if set to -1, it will so as many posts as in the data file
 number_of_posts = 81
 images_folder = f"{project_dir}/sources/images/{TOPIC}"
 images_folder_cropped = f"{images_folder}/cropped"

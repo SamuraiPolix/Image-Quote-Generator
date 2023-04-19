@@ -47,6 +47,9 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
     # Creating folder for customer
     output_path = create_dirs(output_folder, customer_name)
 
+    # If number_of_posts is set to -1, it will do it for the amount of quotes there is in the data file
+    if number_of_posts == -1:
+        number_of_posts = len(quotes)-1
     for i in range(number_of_posts):
         start_time = time.time()
         print(f"Creating Post #{i}")
