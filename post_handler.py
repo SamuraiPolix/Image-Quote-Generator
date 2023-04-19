@@ -22,7 +22,7 @@ def create_dirs(output_folder, customer_name):
     return output_path
 
 
-def create_posts(images_folder, text_file, font_dir, output_folder, customer_name, number_of_posts, logo_file: str = None):
+def create_posts(images_folder, text_file, font_dir, output_folder, customer_name, number_of_posts, logo_file: str = None, show_author : bool = False):
     run_time_average = 0
     if number_of_posts > 1:
         start_time_total = time.time()
@@ -55,6 +55,13 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
         print(f"Creating Post #{i}")
 
         text = quotes[i]
+        quote = text.split(":::")
+        quote_text = quote[0]
+        if show_author:
+            author_text = quote[1]
+            if author_text.rstrip(" ") == "":
+                author_text = None
+
 
         # Choose a random image file from the list
         random_image_num = image_num[0]
@@ -67,9 +74,9 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
         image_license = image_license[len(image_license)-1].rstrip(".jpg")
 
         file_name = f"/{i}-{image_license}.jpg"
-        create_post(image_file=image_file, text=text,
+        create_post(image_file=image_file, quote_text=quote_text,
                          font_dir=font_dir, output_path=output_path, file_name=file_name,
-                         logo_file=logo_file, customer_name=customer_name)
+                         logo_file=logo_file, customer_name=customer_name, author_text=author_text)
 
         end_time = time.time()
         run_time = end_time - start_time
@@ -86,7 +93,7 @@ def create_posts(images_folder, text_file, font_dir, output_folder, customer_nam
               "seconds = ", round(run_time_average / 60, 2), " minutes! \033[0m")
 
 
-def create_post(image_file, text, font_dir, output_path, file_name, logo_file, customer_name):
+def create_post(image_file, quote_text, font_dir, output_path, file_name, logo_file, customer_name, author_text: str = None):
     # Open specific image
     img = Image.open(image_file)
 
@@ -105,7 +112,7 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
     # max_char_count = int(img.size[0] / avg_char_width)
     max_char_count = 25
     # Create a wrapped text object using scaled character count
-    new_text = textwrap.fill(text=text, width=max_char_count)
+    new_text = textwrap.fill(text=quote_text, width=max_char_count)
     # new_text = helper_images.split_string(text, max_char_count)
     # Define the positions of logo and text
     x_logo = 0
@@ -122,6 +129,16 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
     # Add main text to the image
     draw.text(position, text=new_text, font=font, fill=(255, 255, 255, 255), anchor='mm',
               align='center')
+
+    if author_text is not None:
+        # Add author text
+        # Count '\n' in the text to see how many lines there are
+        num_of_lines = new_text.count("\n") + 1
+        line_height = 60  # TODO CHECK REAL HEIGHT
+        text_height = line_height * num_of_lines
+        # TODO CHANGE AUTHORS FONT
+        author_position = (position[0], position[1] + text_height)
+        draw.text(author_position, text=author_text, font=font, fill=(255, 255, 255, 255), anchor='mm', align='center')
 
     if logo_file is not None:
         # Open logo file
@@ -144,7 +161,7 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
         # Convert from RGBA to RGB
         img_with_logo_rgb = img_with_logo.convert("RGB")
 
-        file_name
+        # file_name
 
         # Save the image
         img_with_logo_rgb.save(f"{output_path}/{file_name}")
@@ -156,3 +173,4 @@ def create_post(image_file, text, font_dir, output_path, file_name, logo_file, c
     img.save(f"{output_path}/{file_name}")
     # combined.show()
     return f"{output_path}/{file_name}"
+
