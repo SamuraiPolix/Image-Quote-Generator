@@ -38,7 +38,6 @@ def split_string(string, max_chars_per_line):
         return lines[0]
 
 
-
 def darken_images(images_folder, output_folder):
     # Set desired darkness
     dark = 0.5
@@ -135,3 +134,38 @@ def create_new_topic_dirs(topic, project_dir):
         os.makedirs(f"{project_dir}/sources/images/{topic}")
         os.makedirs(f"{project_dir}/sources/images/{topic}/cropped")
         os.makedirs(f"{project_dir}/sources/images/{topic}/cropped/darken")
+
+
+def fix_text_syntax(font: str, text_file):
+    with open(text_file, 'r', encoding="utf-8") as file:
+        lines = file.readlines()
+
+    # Bebas can't display ’ -> replace with '
+    if font.__contains__("Bebas"):
+        # open file in read mode
+        file = open(text_file, "r")
+        replaced_content = ""
+
+        # looping through the file
+        for line in file:
+            # stripping line break
+            line = line.strip()
+
+            # replacing the texts
+            new_line = line.replace("’", "'").replace("’", "'")
+
+            # concatenate the new string and add an end-line break
+            replaced_content = replaced_content + new_line + "\n"
+
+        # close the file
+        file.close()
+
+        # Open file in write mode
+        write_file = open(text_file, "w")
+
+        # overwriting the old file contents with the new/replaced content
+        write_file.write(replaced_content)
+
+        # close the file
+        write_file.close()
+

@@ -23,10 +23,6 @@ def create_dirs(output_folder, customer_name):
 
 
 def create_posts(images_folder, text_file, quote_font, author_font, output_folder, customer_name, number_of_posts, logo_file: str = None, show_author : bool = False):
-    run_time_average = 0
-    if number_of_posts > 1:
-        start_time_total = time.time()
-
     # json_data = json_handler.get_data(json_file)
     # verses: str = json_data[0]
     # refs: str = json_data[1]
@@ -35,10 +31,17 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
     with open(text_file, 'r', encoding='utf-8') as file:
         quotes = file.readlines()
 
+    # If number_of_posts is set to -1, it will do it for the amount of quotes there is in the data file
+    if number_of_posts == -1:
+        number_of_posts = len(quotes) - 1
+
+    run_time_average = 0
+    if number_of_posts > 1:
+        start_time_total = time.time()
 
     # Get list of photos in the specified folder and shuffle it
     image_num = list()
-    image_files = [f"{images_folder}/{file}" for file in os.listdir(images_folder) if file.endswith(".jpg") or file.endswith(".png")]
+    image_files = [f"{images_folder}/{file}" for file in os.listdir(images_folder) if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg")]
     random_for_image = random.randint(0, len(image_files) - 1)
     for i in range(number_of_posts):
         image_num.append((random_for_image + i) % len(image_files))
@@ -47,9 +50,6 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
     # Creating folder for customer
     output_path = create_dirs(output_folder, customer_name)
 
-    # If number_of_posts is set to -1, it will do it for the amount of quotes there is in the data file
-    if number_of_posts == -1:
-        number_of_posts = len(quotes)-1
     for i in range(number_of_posts):
         start_time = time.time()
         print(f"Creating Post #{i}")
@@ -57,11 +57,10 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
         text = quotes[i]
         quote = text.split(":::")
         quote_text = quote[0]
-        if show_author:
+        if show_author and quote_text != text:
             author_text = quote[1]
             if author_text.rstrip(" ") == "":
                 author_text = None
-
 
         # Choose a random image file from the list
         random_image_num = image_num[0]
@@ -75,30 +74,31 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
 
         file_name = f"/{i}-{image_license}.jpg"
         create_post(image_file=image_file, quote_text=quote_text,
-                         font_dir=font_dir, output_path=output_path, file_name=file_name,
+                         quote_font=quote_font, author_font=author_font, output_path=output_path, file_name=file_name,
                          logo_file=logo_file, customer_name=customer_name, author_text=author_text)
 
         end_time = time.time()
         run_time = end_time - start_time
         run_time_average += run_time
         print(f"\033[0;34m DONE #{i}, Run time:", round(run_time, 2), "seconds! \033[0m", output_path)
+        author_text = ""
+        quote_text = ""
 
     if number_of_posts > 1:
         run_time_average /= number_of_posts
         end_time_total = time.time()
         run_time_total = end_time_total - start_time_total
         print(f"\n\033[0;32mDone making {number_of_posts} posts for {customer_name}!"
-              f"\nTotal run time:", round(run_time_total, 2), "seconds!"
-                                                              f"\nAverage run time:", round(run_time_average, 2),
-              "seconds = ", round(run_time_average / 60, 2), " minutes! \033[0m")
+              f"\nTotal run time:", round(run_time_total, 2), "seconds = ", round(run_time_total / 60, 2), " minutes!",
+              f"\nAverage run time:", round(run_time_average, 2), "seconds!\033[0m")
 
 
-def create_post(image_file, quote_text, font_dir, output_path, file_name, logo_file, customer_name, author_text: str = None):
+def create_post(image_file, quote_text, quote_font, author_font, output_path, file_name, logo_file, customer_name, author_text: str = None):
     # Open specific image
     img = Image.open(image_file)
 
     # Load selected font
-    font = ImageFont.truetype(font=f'{font_dir}', size=75)
+    quote_font = ImageFont.truetype(font=f'{quote_font}', size=75)
 
     # Create DrawText object
     draw = ImageDraw.Draw(im=img)
@@ -113,6 +113,8 @@ def create_post(image_file, quote_text, font_dir, output_path, file_name, logo_f
     max_char_count = 25
     # Create a wrapped text object using scaled character count
     new_text = textwrap.fill(text=quote_text, width=max_char_count)
+    # FIX FONT WITH SPACES
+    new_text = new_text.replace(" ", "  ")
     # new_text = helper_images.split_string(text, max_char_count)
     # Define the positions of logo and text
     x_logo = 0
@@ -124,28 +126,29 @@ def create_post(image_file, quote_text, font_dir, output_path, file_name, logo_f
     # Draw the shadow text
     shadow_color = (0, 0, 0, 128)
     shadow_position = (x_text+5, y_text+5)
-    draw.text(shadow_position, new_text, font=font, fill=shadow_color, anchor='mm', align='center')
+    draw.text(shadow_position, new_text, font=quote_font, fill=shadow_color, anchor='mm', align='center')
 
     # Add main text to the image
-    draw.text(position, text=new_text, font=font, fill=(255, 255, 255, 255), anchor='mm',
+    draw.text(position, text=new_text, font=quote_font, fill=(255, 255, 255, 255), anchor='mm',
               align='center')
 
     if author_text is not None:
         # Add author text
         # Count '\n' in the text to see how many lines there are
+        author_font = ImageFont.truetype(font=f'{author_font}', size=45)
         num_of_lines = new_text.count("\n") + 1
-        line_height = 60  # TODO CHECK REAL HEIGHT
-        text_height = line_height * num_of_lines
+        line_height = 55     # TODO CHECK REAL HEIGHT
+        text_height = line_height * num_of_lines + 40
         # TODO CHANGE AUTHORS FONT
         author_position = (position[0], position[1] + text_height)
-        draw.text(author_position, text=author_text, font=font, fill=(255, 255, 255, 255), anchor='mm', align='center')
+        draw.text(author_position, text=author_text, font=author_font, fill=(255, 255, 255, 255), anchor='mm', align='center')
 
     if logo_file is not None:
         # Open logo file
         img_logo = Image.open(logo_file)
 
-        # Reduce the alpha of the overlay image by 50%
-        alpha = 0.7
+        # Reduce the alpha of the overlay image by 40%
+        alpha = 0.6
         enhancer = ImageEnhance.Brightness(img_logo)
         img_logo_darken = enhancer.enhance(alpha)
 
