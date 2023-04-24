@@ -5,7 +5,7 @@ import helper
 # Available topics: christian, fitness
 TOPIC = "fitness"
 SHOW_AUTHOR = True
-CUSTOMER_NAME = "final_no_logo"
+CUSTOMER_NAME = "w8lifts_100logo"
 NUM_OF_POSTS = -1        # If number of posts if set to -1, it will so as many posts as in the data file
 
 # Define the paths and values to everything
@@ -30,12 +30,12 @@ if __name__ == "__main__":
     # helper.darken_images(images_folder_cropped, images_folder_cropped_darken)
 
     # LOGO
-    # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
-    #                      quote_font=quote_font, author_font=author_font, output_folder=output_folder,
-    #                      logo_file=logo_file, customer_name=CUSTOMER_NAME, number_of_posts=NUM_OF_POSTS, show_author=SHOW_AUTHOR)
-
-    # NO LOGO
     post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
                          quote_font=quote_font, author_font=author_font, output_folder=output_folder,
-                         customer_name=CUSTOMER_NAME, number_of_posts=NUM_OF_POSTS, show_author=SHOW_AUTHOR)
+                         logo_file=logo_file, customer_name=CUSTOMER_NAME, number_of_posts=NUM_OF_POSTS, show_author=SHOW_AUTHOR)
+
+    # NO LOGO
+    # post_handler.create_posts(images_folder=images_folder_cropped_darken, text_file=text_file,
+    #                      quote_font=quote_font, author_font=author_font, output_folder=output_folder,
+    #                      customer_name=CUSTOMER_NAME, number_of_posts=NUM_OF_POSTS, show_author=SHOW_AUTHOR)
 

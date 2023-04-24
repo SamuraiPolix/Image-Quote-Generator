@@ -54,6 +54,8 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
         start_time = time.time()
         print(f"Creating Post #{i}")
 
+        author_text = ""
+        quote_text = ""
         text = quotes[i]
         quote = text.split(":::")
         quote_text = quote[0]
@@ -81,8 +83,6 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
         run_time = end_time - start_time
         run_time_average += run_time
         print(f"\033[0;34m DONE #{i}, Run time:", round(run_time, 2), "seconds! \033[0m", output_path)
-        author_text = ""
-        quote_text = ""
 
     if number_of_posts > 1:
         run_time_average /= number_of_posts
@@ -147,8 +147,8 @@ def create_post(image_file, quote_text, quote_font, author_font, output_path, fi
         # Open logo file
         img_logo = Image.open(logo_file)
 
-        # Reduce the alpha of the overlay image by 40%
-        alpha = 0.6
+        # Reduce the alpha of the overlay image by 30%
+        alpha = 0.7
         enhancer = ImageEnhance.Brightness(img_logo)
         img_logo_darken = enhancer.enhance(alpha)
 
