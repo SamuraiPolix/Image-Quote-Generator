@@ -22,7 +22,7 @@ def create_dirs(output_folder, customer_name):
     return output_path
 
 
-def create_posts(images_folder, text_file, font_dir, output_folder, customer_name, number_of_posts, logo_file: str = None, show_author : bool = False):
+def create_posts(images_folder, text_file, quote_font, author_font, output_folder, customer_name, number_of_posts, logo_file: str = None, show_author : bool = False):
     run_time_average = 0
     if number_of_posts > 1:
         start_time_total = time.time()
