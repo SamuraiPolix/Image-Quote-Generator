@@ -3,9 +3,9 @@ import post_handler
 import helper
 
 # Available topics: christian, fitness
-TOPIC = "fitness"
-SHOW_AUTHOR = True
-CUSTOMER_NAME = "w8lifts_100logo"
+TOPIC = "christian"
+SHOW_AUTHOR = False
+CUSTOMER_NAME = "EverythinGod_dimmedLogo"
 NUM_OF_POSTS = -1        # If number of posts if set to -1, it will so as many posts as in the data file
 
 # Define the paths and values to everything
@@ -14,8 +14,8 @@ images_folder = f"{project_dir}/sources/images/{TOPIC}"
 images_folder_cropped = f"{images_folder}/cropped"
 images_folder_cropped_darken = f"{images_folder_cropped}/darken"
 text_file = f"{project_dir}/sources/text_data/{TOPIC}.txt"
-# quote_font = f"{project_dir}/sources/fonts/MouldyCheeseRegular-WyMWG.ttf"       # Bible
-quote_font = f"{project_dir}/sources/fonts/Bebas-KM7y.ttf"       # Fitness
+quote_font = f"{project_dir}/sources/fonts/MouldyCheeseRegular-WyMWG.ttf"       # Bible
+# quote_font = f"{project_dir}/sources/fonts/Bebas-KM7y.ttf"       # Fitness
 author_font = f"{project_dir}/sources/fonts/MangabeyRegular-rgqVO.otf"
 output_folder = f"{project_dir}/customers/{TOPIC}"
 logo_file = f"{project_dir}/sources/logo.png"

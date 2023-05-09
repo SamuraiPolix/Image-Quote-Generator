@@ -1,0 +1,9 @@
+For here:
+
+
+
+For Canva:
+Write 500 motivational quotes about fitness and working out. Put the quotes in a table with 3 columns. 1 column contains the number of the quote (1-500). The 2nd column contains the quote. The 3rd column contains the quote author. Example quotes include "You were born an original, don't be a copy", "Results happen over time not overnight, stay consistent", "Don't blame distractions, improve your focus". Only write quotes with max 15 words or less.
+Make sure there are no duplicates.
+
+

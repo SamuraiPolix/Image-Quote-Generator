@@ -1,0 +1,17 @@
+For here:
+Write 500 motivational quotes about business and success. Put the quotes in the following format: "{quote} ::: {quote_quthor}" .
+Example quotes include:
+"Most people fail, not because of lack of desire, but, because of lack of commitment. ::: Vince Lombardi",
+"Success usually comes to those who are too busy to be looking for it. ::: Henry David Thoreau",
+"You miss 100% of the shots you don't take. ::: Wayne Gretzky"
+Don't put the quotation marks.
+Only write quotes with max 15 words or less.
+Make sure there are no duplicates.
+Don't number them, Just write one per line
+
+
+For Canva:
+Write 500 motivational quotes about fitness and working out. Put the quotes in a table with 3 columns. 1 column contains the number of the quote (1-500). The 2nd column contains the quote. The 3rd column contains the quote author. Example quotes include "You were born an original, don't be a copy", "Results happen over time not overnight, stay consistent", "Don't blame distractions, improve your focus". Only write quotes with max 15 words or less.
+Make sure there are no duplicates.
+
+

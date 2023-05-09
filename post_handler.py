@@ -148,7 +148,7 @@ def create_post(image_file, quote_text, quote_font, author_font, output_path, fi
         img_logo = Image.open(logo_file)
 
         # Reduce the alpha of the overlay image by 30%
-        alpha = 0.7
+        alpha = 0.3
         enhancer = ImageEnhance.Brightness(img_logo)
         img_logo_darken = enhancer.enhance(alpha)
 
