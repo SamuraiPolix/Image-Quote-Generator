@@ -3,9 +3,9 @@ import post_handler
 import helper
 
 # Available topics: christian, fitness
-TOPIC = "christian"
+TOPIC = "fitness"
 SHOW_AUTHOR = False
-CUSTOMER_NAME = "test6"
+CUSTOMER_NAME = "ferAuthor"
 NUM_OF_POSTS = -1        # If number of posts if set to -1, it will so as many posts as in the data file
 
 # Define the paths and values to everything
