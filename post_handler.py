@@ -47,6 +47,11 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
         image_num.append((random_for_image + i) % len(image_files))
     random.shuffle(image_num)
 
+    # Data for spreadsheet
+    spreadsheet_col1 = list()
+    spreadsheet_col2 = list()
+    spreadsheet_col3 = list()
+
     # Creating folder for customer
     output_path = create_dirs(output_folder, customer_name)
 
@@ -79,10 +84,18 @@ def create_posts(images_folder, text_file, quote_font, author_font, output_folde
                          quote_font=quote_font, author_font=author_font, output_path=output_path, file_name=file_name,
                          logo_file=logo_file, customer_name=customer_name, author_text=author_text)
 
+        # Add to spreadsheet
+        spreadsheet_col1.append(file_name.strip("/"))
+        spreadsheet_col2.append(author_text)
+        spreadsheet_col3.append(quote_text)
+
         end_time = time.time()
         run_time = end_time - start_time
         run_time_average += run_time
         print(f"\033[0;34m DONE #{i}, Run time:", round(run_time, 2), "seconds! \033[0m", output_path)
+
+    helper.add_sheets(file_names=spreadsheet_col1, output_path=output_path, customer_name=customer_name,
+                      authors=spreadsheet_col2, quotes=spreadsheet_col3)
 
     if number_of_posts > 1:
         run_time_average /= number_of_posts

@@ -169,3 +169,10 @@ def fix_text_syntax(font: str, text_file):
         # close the file
         write_file.close()
 
+def add_sheets(file_names: str, output_path: str, customer_name: str, authors: str, quotes: str):
+    with open(f'{output_path}/{customer_name}.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["File Name", "Reference", "Verse"])
+        for i in range(len(file_names)):
+            writer.writerow([file_names[i], authors[i], quotes[i]])
+
