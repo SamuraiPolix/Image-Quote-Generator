@@ -3,9 +3,9 @@ import post_handler
 import helper
 
 # Available topics: christian, fitness
-TOPIC = "fitness"
+TOPIC = "christian"
 SHOW_AUTHOR = False
-CUSTOMER_NAME = "ferAuthor"
+CUSTOMER_NAME = "EverythinGod_new2"
 NUM_OF_POSTS = -1        # If number of posts if set to -1, it will so as many posts as in the data file
 
 # Define the paths and values to everything
@@ -18,7 +18,7 @@ quote_font = f"{project_dir}/sources/fonts/MouldyCheeseRegular-WyMWG.ttf"       
 # quote_font = f"{project_dir}/sources/fonts/Bebas-KM7y.ttf"       # Fitness
 author_font = f"{project_dir}/sources/fonts/MangabeyRegular-rgqVO.otf"
 output_folder = f"{project_dir}/customers/{TOPIC}"
-logo_file = f"{project_dir}/sources/becomenew.png"
+logo_file = f"{project_dir}/sources/everythingod2.png"
 
 
 if __name__ == "__main__":

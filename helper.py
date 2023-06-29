@@ -1,3 +1,5 @@
+import csv
+
 from PIL import Image, ImageEnhance
 import os
 
