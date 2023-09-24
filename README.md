@@ -8,8 +8,9 @@
 
 <h2 id="examples">📷 Examples</h2>
 
-<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/2a267ced-e5b6-4648-ba82-d1b693681bc8" width="45%">
-<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/70b0f651-030c-4052-bdcf-a5814562f763" width="45%">
+<img src="https://github.com/SamuraiPolix/ImageQuoteGenerator/assets/52662032/526f7676-829f-4b77-aedd-cba775a95ab5" width="85%">
+<img src="https://github.com/SamuraiPolix/ImageQuoteGenerator/assets/52662032/1bfadae8-15ec-4b43-ad4d-209e24ddfbb6" width="85%">
+
 
 ## 📝 Table of Contents
 
@@ -98,9 +99,11 @@ After running the script you will get:
 
 <img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/06119ee9-3b64-4a43-8305-5ff686187a41" width="45%">
 <img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/95eea51f-31e3-487b-981a-a89e3156dec7" width="45%">
-
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/2a267ced-e5b6-4648-ba82-d1b693681bc8" width="45%">
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/70b0f651-030c-4052-bdcf-a5814562f763" width="45%">
 
 2. A spreadsheet containing the file names, quotes, and authors, to make it easier to find the image you want.
+
 
 <h2 id="note">🗒️ Note</h2>
 
