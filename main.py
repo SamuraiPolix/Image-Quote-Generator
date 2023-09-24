@@ -2,12 +2,11 @@ import os
 import post_handler
 import helper
 
-# Available topics: christian, fitness
-TOPIC = "christian"
-SHOW_AUTHOR = False
+
+TOPIC = "christian"         # Available topics: christian, fitness
+SHOW_AUTHOR = False         # Shows the author of the quote under the quote (if available)
 CUSTOMER_NAME = "your_name"
-# Disable limit: -1, it will create images according to the amount of quotes in the .txt file
-NUM_OF_POSTS = -1
+NUM_OF_POSTS = 35           # Disable limit: -1 (will create images according to the amount of quotes in the .txt file)
 
 ''' To create a new topic, please follow these steps:
 1. Create a {topic}.txt file inside /sources/text_data
@@ -36,9 +35,7 @@ logo_file = f"{project_dir}/sources/logo.png"
 
 if __name__ == "__main__":
     # helper.create_new_topic_dirs(TOPIC, project_dir)
-
-    # helper.fix_text_syntax(quote_font, text_file)
-
+    # helper.fix_text_syntax(quote_font, text_file)         # Goes through the .txt file and fixes chars for some fonts
     # helper.cut_images_new(images_folder, images_folder_cropped)
     # helper.darken_images(images_folder_cropped, images_folder_cropped_darken)
 
