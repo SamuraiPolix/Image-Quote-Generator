@@ -8,8 +8,8 @@
 
 <h2 id="examples">📷 Examples</h2>
 
-<img src="https://github.com/SamuraiPolix/ChristianPostMaker/assets/52662032/978d6835-c96b-4525-84a3-1d8c7cf9c2cf" width="45%">
-<img src="https://github.com/SamuraiPolix/ChristianPostMaker/assets/52662032/cc4562a6-40ba-46ca-b139-9e5f5d69a937" width="45%">
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/2a267ced-e5b6-4648-ba82-d1b693681bc8" width="45%">
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/70b0f651-030c-4052-bdcf-a5814562f763" width="45%">
 
 ## 📝 Table of Contents
 
@@ -96,8 +96,8 @@ Feel free to create a Pull Request if you want to help others as well!
 After running the script you will get:
 1. The edited images.
 
-<img src="https://github.com/SamuraiPolix/ChristianPostMaker/assets/52662032/cdbf3b02-0ddb-474d-adbc-b3a722b4ad0f" width="45%">
-<img src="https://github.com/SamuraiPolix/ChristianPostMaker/assets/52662032/76139b36-8306-4146-91b2-b3bfa67723c4" width="45%">
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/06119ee9-3b64-4a43-8305-5ff686187a41" width="45%">
+<img src="https://github.com/SamuraiPolix/QuoteGenerator/assets/52662032/95eea51f-31e3-487b-981a-a89e3156dec7" width="45%">
 
 
 2. A spreadsheet containing the file names, quotes, and authors, to make it easier to find the image you want.
