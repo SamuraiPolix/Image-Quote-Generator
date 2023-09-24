@@ -5,8 +5,21 @@ import helper
 # Available topics: christian, fitness
 TOPIC = "christian"
 SHOW_AUTHOR = False
-CUSTOMER_NAME = "EverythinGod_new2"
-NUM_OF_POSTS = -1        # If number of posts if set to -1, it will so as many posts as in the data file
+CUSTOMER_NAME = "your_name"
+# Disable limit: -1, it will create images according to the amount of quotes in the .txt file
+NUM_OF_POSTS = -1
+
+''' To create a new topic, please follow these steps:
+1. Create a {topic}.txt file inside /sources/text_data
+2. Run "helper.create_new_topic_dirs(TOPIC, project_dir)" to auto create all the directories needed
+3. Add images to /sources/images/{topic}
+4. Run "helper.cut_images_new(images_folder, images_folder_cropped)" to crop the images to 1080 X 1350
+(you can change the dimension inside the function)
+5. Run "helper.darken_images(images_folder_cropped, images_folder_cropped_darken)" if you want to make the images darker
+(it makes the text look better)
+ANS THAT'S IT! :)
+Feel free to create a Pull Request if you want to help others as well!
+'''
 
 # Define the paths and values to everything
 project_dir = os.getcwd().replace("\\", "/")
@@ -17,8 +30,8 @@ text_file = f"{project_dir}/sources/text_data/{TOPIC}.txt"
 quote_font = f"{project_dir}/sources/fonts/MouldyCheeseRegular-WyMWG.ttf"       # Bible
 # quote_font = f"{project_dir}/sources/fonts/Bebas-KM7y.ttf"       # Fitness
 author_font = f"{project_dir}/sources/fonts/MangabeyRegular-rgqVO.otf"
-output_folder = f"{project_dir}/customers/{TOPIC}"
-logo_file = f"{project_dir}/sources/everythingod2.png"
+output_folder = f"{project_dir}/generated/{TOPIC}"
+logo_file = f"{project_dir}/sources/logo.png"
 
 
 if __name__ == "__main__":
